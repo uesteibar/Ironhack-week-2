@@ -12,29 +12,36 @@ tasks = []
 
 
 get '/tasks' do
+  res = ""
   tasks.each do |task|
-    puts "#{task.priority} - #{task.description}"
+    res << "#{task.print}\n"
   end
+  res
 end
 
 get '/tasks/priority/:priority' do |priority|
+  res = ""
   tasks.each do |task|
     if task.priority == priority
-      task.print
+      res << "#{task.print}\n"
     end
   end
+  res
 end
 
 get '/tasks/search/:word' do |word|
-    tasks.each do |task|
-      if task.description.include?(word)
-        task.print
-      end
-    end  
+  res = ""
+  tasks.each do |task|
+    if task.description.include?(word)
+      res << "#{task.print}\n"
+    end
+  end  
+  res
 end
 
 post '/tasks/new' do
   description = params[:description]
   priority = params[:priority]
-  tasks << Task.new(description, priority)  
+  tasks << Task.new(description, priority)
+  true
 end

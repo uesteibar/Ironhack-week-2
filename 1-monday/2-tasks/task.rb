@@ -7,6 +7,6 @@ class Task
   end
 
   def print
-    puts "#{@priority} - #{@description}"
+    "#{@priority} - #{@description}"
   end
 end

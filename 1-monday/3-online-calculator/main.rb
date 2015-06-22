@@ -3,6 +3,8 @@ require "sinatra"
 require "sinatra/reloader"
 
 require "./lib/calculator"
+require "./lib/storage/memory_handler"
+require "./lib/storage/memory_file_storage"
 
 require "pry"
 
@@ -21,7 +23,10 @@ operations_lambdas = {
     }
 }
 
+memory_file_path = './public/memory_saved'
+
 get '/' do
+  @memory = params[:memory]
   erb :home
 end
 
@@ -41,4 +46,15 @@ get '/result' do
   @res = params[:res]
 
   erb :result
+end
+
+post '/memory' do
+  num = params[:number]
+  MemoryHandler.new(MemoryFileStorage.new(memory_file_path)).put(num)
+  redirect('/')
+end
+
+get '/memory' do
+  memory = MemoryHandler.new(MemoryFileStorage.new(memory_file_path)).get
+  redirect("/?memory=#{memory}")
 end

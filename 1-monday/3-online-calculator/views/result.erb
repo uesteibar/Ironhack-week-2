@@ -8,5 +8,9 @@
 	<h2>The result for the <%= @operation %> between <%= @a %> and <%= @b %> is <%= @res %></h2>
 
 	<h3><a href="/">Go back</a></h3>
+	<form action="/memory" method="POST">
+		<input name="number" value="<%= @res %>">
+		<input type="submit" value="Save to memory">
+	</form>
 </body>
 </html>

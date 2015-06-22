@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= @artist %></title>
+</head>
+<body>
+	<h1><%= @artist %></h1>
+
+	<% if @artist_songs.any? %>
+		<ol>
+			<% @artist_songs.each do |song| %>
+				<li><%= song.artist %> - <%= song.title %></li>
+			<% end %>
+		</ol>
+	<% else %>
+		<h3>No results here! Sorry...</h3>
+	<% end %>
+
+	<a href="/">Go back</a>
+</body>
+</html>

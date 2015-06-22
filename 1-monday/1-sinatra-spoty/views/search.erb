@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search for: <%= @term %></title>
+</head>
+<body>
+	<h1>Results corresponding to '<%= @term %>'</h1>
+
+	<% if @songs.any? %>
+		<ol>
+			<% @songs.each do |song| %>
+				<li><%= song.artist %> - <%= song.title %></li>
+			<% end %>
+		</ol>
+	<% else %>
+		<h3>No results here! Sorry...</h3>
+	<% end %>
+
+	<a href="/">Go back</a>
+</body>
+</html>

@@ -27,6 +27,18 @@ post '/songs' do
   redirect('/')
 end
 
+get '/artist/:artist' do |artist|
+  @artist = artist.capitalize
+  @artist_songs = songs_collection.search_by_artist(artist)
+  erb :artist
+end
+
+get '/search' do
+  @term = params[:search_term]
+  @songs = songs_collection.search_by_term(@term)
+  erb :search
+end
+
 get '/enough' do
   erb :enough
 end

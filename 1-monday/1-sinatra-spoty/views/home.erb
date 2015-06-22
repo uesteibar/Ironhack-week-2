@@ -13,15 +13,20 @@
 	</form>
 
 	<% if @songs_collection.songs.any? %>
-		
 		<ol>
-			
 			<% @songs_collection.songs.each do |song| %>
-				<li><%= song.artist %> - <%= song.title %></li>
+				<li><a href="/artist/<%= song.artist.downcase %>"><%= song.artist %></a> - <%= song.title.capitalize %></li>
 			<% end %>
-
 		</ol>
-
+	<% else %>
+		<h3>No songs here yet! Add some...</h3>
 	<% end %>
+
+	<form action="/search" method="GET">
+		<input type="text" name="search_term">
+		<input type="submit" value="Search">
+	</form>
+
+
 </body>
 </html>

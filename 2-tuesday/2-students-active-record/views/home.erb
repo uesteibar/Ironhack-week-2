@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ironhackers!</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<h1>IRONHACK!</h1>
+
+	<div class="left student-list">
+		<% if @students.any? %>
+			<ol>
+				<% @students.each do |student| %>
+					<li>
+							<h3>Name: <%= student.complete_name %></h3>
+							<% if student.number_of_dogs == 0 %>
+								<form class="delete-button" action="/students/<%= student.id %>" method="POST">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="submit" value="delete student">
+								</form>
+							<% end %>
+							<p>Birthday: <%= student.birthday %></p>
+							<p><a href="<%= student.website %>" target="_blank">website</a></p>
+							<p>Dogs: <%= student.number_of_dogs %></p>
+							<p>
+							Programming experience: <%= student.first_programming_experience ? "No" : "Yes"%>
+							</p>
+					</li>
+				<% end %>
+			</ol>
+		<% else %>
+			<h3>This is so lonely, no students yet :(</h3>
+		<% end %>
+	</div>
+
+	<div class="right">
+		<h1>New student!</h1>
+		<form action="/students" method="POST">
+			<div class="input-container">
+				<label for="name">Name: </label>
+				<input class="text-input" name="name" type="text">
+			</div>
+
+			<div class="input-container">
+				<label for="surnames">Surnames: </label>
+				<input class="text-input" name="surnames" type="text">
+			</div>
+
+			<div class="input-container">
+				<label for="birthday">Birthday: </label>
+				<input name="birthday" type="date">
+			</div>
+
+			<div class="input-container">
+				<label for="website">Website: </label>
+				<input class="text-input" name="website" type="url">
+			</div>
+
+			<div class="input-container">
+				<label for="dogs">Dogs: </label>
+				<input name="dogs" type="number" value="0">
+			</div>
+
+			<div class="input-container">
+				<label for="programming_experience">Programming Experience: </label>
+				<input name="programming_experience" type="checkbox">
+			</div>
+
+			<div class="input-container"><input type="submit"></div>
+
+		</form>
+	</div>
+</body>
+</html>

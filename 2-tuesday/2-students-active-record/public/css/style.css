@@ -1,0 +1,38 @@
+
+.left {
+	width: 50%;
+	float: left
+}
+
+.right {
+	width: 40%;
+	float: left;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+.input-container {
+	margin-bottom: 1em;
+}
+
+.text-input {
+	width: 80%;
+}
+
+input {
+	float: right;
+}
+
+.delete-button {
+	float: left;
+	margin-bottom: 1em;
+}
+
+.student-list {
+	height: 80vh;
+	overflow-y: auto;
+}
+
+.student-list p {
+	clear: both;
+}

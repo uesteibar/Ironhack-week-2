@@ -7,9 +7,10 @@ class Student < ActiveRecord::Base
   AGE_MAXIMUM = 35
   REJECTED_NAMES = ["Llorenç", "Sharon", "Nick"]
 
+  valiates_presence_of :number_of_dogs
   validate :proper_age, :accepted_name,
             :has_name, :has_surnames,
-            :proper_url, :has_dogs
+            :proper_url
 
   def complete_name
     "#{name} #{surnames}"
@@ -32,12 +33,6 @@ class Student < ActiveRecord::Base
   def proper_url
     unless website.match(/\Ahttp:/)
       errors.add(:website, "that's not a proper url")
-    end
-  end
-
-  def has_dogs
-    unless number_of_dogs > 0
-      errors.add(:number_of_dogs, 'needs to have at least one dog')
     end
   end
 

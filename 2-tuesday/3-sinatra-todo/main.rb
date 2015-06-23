@@ -26,7 +26,6 @@ end
 
 post '/tasks' do
   description = params[:description]
-  if (Task.new description: description).save
-    redirect to('/')
-  end
+  (Task.new description: description).save
+  redirect to('/')
 end

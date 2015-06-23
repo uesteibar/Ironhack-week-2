@@ -26,6 +26,20 @@ end
 
 post '/tasks' do
   description = params[:description]
-  (Task.new description: description).save
+  (Task.new name: description,
+    done: false,
+    date: DateTime.now.strftime('%Y-%m-%d %H:%M:%S')).save
+  redirect to('/')
+end
+
+delete '/tasks/:id' do |id|
+  TasksRetriever.new.by_id(id).destroy
+  redirect to('/')
+end
+
+put '/tasks/:id' do |id|
+  task = TasksRetriever.new.by_id(id)
+  task.done = true
+  task.save
   redirect to('/')
 end

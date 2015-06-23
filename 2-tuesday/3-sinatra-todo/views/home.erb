@@ -15,11 +15,25 @@
 	<% if @tasks.any? %>
 		<ul>
 			<% @tasks.each do |task| %>
-				<li><%= task.print %></li>
+			<li>
+				<form action="/tasks/<%= task.id %>" method="POST">
+						<% if task.done %>
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="submit" value="X">
+							<%= task.print %>
+						<% else %>
+							<input type="hidden" name="_method" value="PUT">
+							<input type="hidden" name="id" value="<%= task.id %>">
+							<input type="submit" value="√">
+							<%= task.print %>
+						<% end %>
+					</form>
+				</li>
 			<% end %>
 		</ul>
 	<% else %>
 		<h3>No tasks yet :(</h3>
 	<% end %>
+
 </body>
 </html>

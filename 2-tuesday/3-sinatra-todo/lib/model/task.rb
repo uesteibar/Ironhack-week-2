@@ -1,10 +1,10 @@
 
 class Task < ActiveRecord::Base
 
-  validates_presence_of :description
+  validates_presence_of :name
 
   def print
-    description
+    name
   end
   
 end

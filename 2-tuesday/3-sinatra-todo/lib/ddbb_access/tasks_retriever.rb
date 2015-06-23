@@ -1,7 +1,7 @@
 
 class TasksRetriever
-  def get_by_user(user_id)
-    Task.search_by_user_id(user_id)
+  def by_id(id)
+    Task.find_by_id(id)
   end
 
   def all

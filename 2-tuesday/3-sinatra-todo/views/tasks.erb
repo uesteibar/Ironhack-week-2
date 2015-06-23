@@ -3,12 +3,18 @@
 <html>
 <head>
 	<title>SuperTasker!</title>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<h1>Welcome to the SuperTasker!</h1>
 
+	<form action="/session" method="POST">
+		<input type="hidden" name="_method" value="DELETE">
+		<input type="submit" value="Log out">
+	</form>
+
 	<form action="/tasks" method="POST">
-		<input type="text" name="description">
+		<input class="task-input" type="text" name="description">
 		<input type="submit" value="add">
 	</form>
 

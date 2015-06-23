@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SuperTasker!</title>
+</head>
+<body>
+	<h1>Welcome to the SuperTasker!</h1>
+
+	<form action="/tasks" method="POST">
+		<input type="text" name="description">
+		<input type="submit" value="add">
+	</form>
+
+	<% if @tasks.any? %>
+		<ul>
+			<% @tasks.each do |task| %>
+				<li><%= task.print %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<h3>No tasks yet :(</h3>
+	<% end %>
+</body>
+</html>

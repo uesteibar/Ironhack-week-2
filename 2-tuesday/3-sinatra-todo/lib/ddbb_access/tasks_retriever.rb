@@ -5,6 +5,15 @@ class TasksRetriever
   end
 
   def all
-    Task.all
+    tasks = []
+    urgent_tasks = []
+    Task.all.each do |task|
+      if task.name.downcase.include?("urgent")
+        urgent_tasks << task
+      else
+        tasks << task
+      end
+    end
+    urgent_tasks.concat(tasks)
   end
 end

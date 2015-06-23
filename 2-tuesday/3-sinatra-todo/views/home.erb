@@ -13,7 +13,7 @@
 	</form>
 
 	<% if @tasks.any? %>
-		<ul>
+		<ol>
 			<% @tasks.each do |task| %>
 			<li>
 				<form action="/tasks/<%= task.id %>" method="POST">
@@ -30,7 +30,7 @@
 					</form>
 				</li>
 			<% end %>
-		</ul>
+		</ol>
 	<% else %>
 		<h3>No tasks yet :(</h3>
 	<% end %>

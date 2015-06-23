@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+</head>
+<body>
+	<% if @username %>
+		<h1>Welcome <%= @username %> </h1>
+	<% else %>
+		<h1>Hello mr. Nobody</h1>
+	<% end %>
+	<form action="/signup" method="POST">
+		<input type="text" name="username">
+		<input type="submit" value="Sign up">
+	</form>
+
+	<% if @users %>
+		<ul>
+			<% @users.each do |id, username| %>
+				<li><%= username %></li>
+			<% end %>
+		</ul>
+	<% else %>
+		<h3>Sign up to see other users.</h3>
+	<% end %>
+	
+</body>
+</html>

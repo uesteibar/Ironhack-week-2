@@ -12,22 +12,20 @@
 			<input type="hidden" name="_method" value="DELETE">
 			<input type="submit" value="Sign out">
 		</form>
+		<% if @users.size > 0 %>
+			<h4>all users:</h4>
+			<ul>
+				<% @users.each do |id, username| %>
+					<li><%= username %></li>
+				<% end %>
+			</ul>
+		<% end %>
 	<% else %>
 		<h1>Hello mr. Nobody</h1>
 		<form action="/signup" method="POST">
 			<input type="text" name="username">
 			<input type="submit" value="Sign up">
 		</form>
-	<% end %>
-
-	<% if @users.size > 0 %>
-		<h4>all users:</h4>
-		<ul>
-			<% @users.each do |id, username| %>
-				<li><%= username %></li>
-			<% end %>
-		</ul>
-	<% else %>
 		<h3>Sign up to see other users.</h3>
 	<% end %>
 	

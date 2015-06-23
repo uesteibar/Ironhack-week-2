@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cats!</title>
+</head>
+<body>
+	<h1>This are our supercats!</h1> <a href="/">Go back</a>
+	<% (1..5).each do |num| %>
+		<div>
+			<img src="img/cat<%= num %>.jpg" alt="cat<%= num %>">
+		</div>
+	<% end %>
+</body>
+</html>

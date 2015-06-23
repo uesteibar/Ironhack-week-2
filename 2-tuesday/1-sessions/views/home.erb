@@ -7,15 +7,21 @@
 <body>
 	<% if @username %>
 		<h1>Welcome <%= @username %> </h1>
+		<h3>Come and see our <a href="/cats">super-cats</a>!!</h3>
+		<form action="/signout" method="POST">
+			<input type="hidden" name="_method" value="DELETE">
+			<input type="submit" value="Sign out">
+		</form>
 	<% else %>
 		<h1>Hello mr. Nobody</h1>
+		<form action="/signup" method="POST">
+			<input type="text" name="username">
+			<input type="submit" value="Sign up">
+		</form>
 	<% end %>
-	<form action="/signup" method="POST">
-		<input type="text" name="username">
-		<input type="submit" value="Sign up">
-	</form>
 
-	<% if @users %>
+	<% if @users.size > 0 %>
+		<h4>all users:</h4>
 		<ul>
 			<% @users.each do |id, username| %>
 				<li><%= username %></li>

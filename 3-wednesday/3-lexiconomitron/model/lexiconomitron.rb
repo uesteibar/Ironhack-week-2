@@ -1,7 +1,8 @@
 
 class Lexiconomitron
+  ALPHABET = "abcdefghijklmnopqrstuvwxyz"
   def initialize(letter)
-    @letter = letter
+    @letter = letter.downcase
   end
   
   def shazam(words)
@@ -23,10 +24,29 @@ class Lexiconomitron
     eat_letter(words.join(delimiter))
   end
 
+  def supercounter(words)
+    words = words.join("")
+    sum = 0
+    (0.upto(words.size-1)).each do |letter_index|
+      if before_letter?(words[letter_index])
+        sum += 1
+
+      end
+    end
+    sum
+  end
+
   private
 
   def eat_letter(word)
     word.downcase.tr(@letter, "")
+  end
+
+  def before_letter?(letter)
+    if ALPHABET.index(letter.downcase) < ALPHABET.index(@letter)
+      return true
+    end
+    false
   end
   
 end

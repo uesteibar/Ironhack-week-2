@@ -25,7 +25,7 @@ class Lexiconomitron
   end
 
   def supercounter(words)
-    words = words.join("")
+    words = eat_letter(words.join(""))
     sum = 0
     (0.upto(words.size-1)).each do |letter_index|
       if before_letter?(words[letter_index])

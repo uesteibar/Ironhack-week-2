@@ -7,7 +7,7 @@ describe ImdbRetriever do
   end
   describe "#get_serie" do
     it "should get a serie when provided a proper title" do
-      expect(@retriever.get_serie("breaking bad").title).to eq("Breaking Bad (2008) (TV Series)")
+      expect(@retriever.get_serie("breaking bad").title).to eq("\"Breaking Bad\"")
     end
 
     it "should return nil when no serie found" do
@@ -19,17 +19,29 @@ describe ImdbRetriever do
     end
   end
 
-  describe "#get_serie_by_id" do
-    it "should get a serie when provided a proper id" do
-      expect(@retriever.get_serie_by_id("0903747").title).to eq("\"Breaking Bad\"")
+  describe "#get_many_series" do
+    before do
+      @series = @retriever.get_many_series(
+        ["V",
+        "breaking bad",
+        "Heroes"])
+    end
+    
+    it "should get an array of series when provided many proper titles" do
+      expect(@series[0].title).to eq("\"V\"")
+
+      expect(@series[1].title).to eq("\"Breaking Bad\"")
+
+      expect(@series[2].title).to eq("\"Heroes\"")
+
     end
 
-    it "should return nil when no serie found" do
-        expect(@retriever.get_serie_by_id("23432423423423342342424242432")).to eq(nil)
-    end
-
-    it "should return nil when nil id provided" do
-        expect(@retriever.get_serie_by_id(nil)).to eq(nil)
+    it "should get an array of series with only the series found" do
+      expect(@retriever.get_many_series(
+        ["asdfdaafweafewafawefa",
+        "breaking bad",
+        "IT Crowd"]).size).to eq(2)
     end
   end
+
 end

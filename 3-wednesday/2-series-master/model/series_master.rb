@@ -9,8 +9,7 @@ class SeriesMaster
     best_serie = nil
     series.each do |title|
       serie_raw = @series_retriever.get_serie(title)
-      aspiring_serie = Serie.new(serie_raw.id, serie_raw.title, serie_raw.rating)
-      best_serie = get_best_of_two(best_serie, aspiring_serie)
+      best_serie = get_best_of_two(best_serie, serie_raw)
     end
     best_serie
   end
@@ -19,16 +18,21 @@ class SeriesMaster
     return if serie_title.nil?
     serie_raw = @series_retriever.get_serie(serie_title)
     if serie_raw
-      serie = @series_retriever.get_serie_by_id(serie_raw.id)
-      if serie
-        return serie.season(1).episode(1).title
-      end
+        return serie_raw.season(1).episode(1).title
     end
     nil
   end
+
+  def most_seasons(series)
+    return if series.nil?
+    ((@series_retriever.get_many_series(series).sort_by {|serie| serie.seasons.size}).reverse)[0]
+  end
+
+  private
 
   def get_best_of_two(best_serie, aspiring_serie)
     return aspiring_serie if best_serie.nil? || best_serie.rating < aspiring_serie.rating
     return best_serie
   end
+    
 end

@@ -8,12 +8,12 @@ describe SeriesMaster do
   end
 
   describe "#best_serie" do
-    it "sould return best serie of all provided" do
+    it "should return best serie of all provided" do
       expect(@master.best_serie(
         ["V",
         "breaking bad",
         "IT Crowd"]
-        ).title).to eq("Breaking Bad (2008) (TV Series)")
+        ).title).to eq("\"Breaking Bad\"")
     end
 
     it "should return nil when no series provided" do
@@ -32,6 +32,24 @@ describe SeriesMaster do
 
     it "should return nil when nil title provided" do
       expect(@master.first_chapter(nil)).to eq(nil)
+    end
+  end
+
+  describe "#most_seasons" do
+    it "should return the serie with most seasons within all provided" do
+      expect(@master.most_seasons(
+        ["V",
+        "breaking bad",
+        "IT Crowd"]
+        ).title).to eq("\"The IT Crowd\"")
+    end
+
+    it "should return nil if empty array is provided" do
+      expect(@master.most_seasons([])).to eq(nil)
+    end
+
+    it "should return nil if nil is provided" do
+      expect(@master.most_seasons(nil)).to eq(nil)
     end
   end
 end

@@ -1,8 +1,6 @@
 
 require "imdb"
 
-require "./model/serie"
-
 class ImdbRetriever
   def get_serie(title)
     return if title.nil?
@@ -10,9 +8,22 @@ class ImdbRetriever
     if results.size == 0
       return nil
     end
-    serie_raw = results[0]
-    Serie.new(serie_raw.id, serie_raw.title, serie_raw.rating)
+    get_serie_by_id(results[0].id)
   end
+
+  def get_many_series(titles)
+    return if titles.nil?
+    series = []
+    titles.each do |title|
+      serie = get_serie(title)
+      if serie
+        series << serie
+      end
+    end
+    series
+  end
+
+  private
 
   def get_serie_by_id(id)
     return if id.nil?

@@ -14,7 +14,9 @@ describe Lexiconomitron do
           "a",
           "test"])).to eq(["sih", "se"])
     end
+  end
 
+  describe "#oompa_loompa" do
     it "should return the words with 3 or less characters (without the 't' letter" do
       expect(@lexiconomitron.oompa_loompa(
         ["if",
@@ -23,6 +25,16 @@ describe Lexiconomitron do
           "be",
           "my",
           "lover"])).to eq(["if", "you", "be", "my"])
+    end
+  end
+
+  describe "#all_in_line" do
+    it "should return a string with the provided words sorted by size and delimited by the provided string" do
+      expect(@lexiconomitron.all_in_line([
+        "words",
+        "are",
+        "tremendously",
+        "nice"], "$")).to eq("remendously$words$nice$are")
     end
   end
 end

@@ -18,6 +18,11 @@ class Lexiconomitron
     end
   end
 
+  def all_in_line(words, delimiter)
+    words.sort_by! { |word| -word.size }
+    eat_letter(words.join(delimiter))
+  end
+
   private
 
   def eat_letter(word)

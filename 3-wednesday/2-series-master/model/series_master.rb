@@ -28,11 +28,23 @@ class SeriesMaster
     ((@series_retriever.get_many_series(series).sort_by {|serie| serie.seasons.size}).reverse)[0]
   end
 
+  def most_episodes(series)
+    return if series.nil?
+    ((@series_retriever.get_many_series(series).sort_by {|serie| count_episodes(serie)}).reverse)[0]
+  end
+
+
   private
 
   def get_best_of_two(best_serie, aspiring_serie)
     return aspiring_serie if best_serie.nil? || best_serie.rating < aspiring_serie.rating
     return best_serie
+  end
+
+  def count_episodes(serie)
+    serie.seasons.reduce(0) do |sum, season|
+      sum += season.episodes.size
+    end
   end
     
 end

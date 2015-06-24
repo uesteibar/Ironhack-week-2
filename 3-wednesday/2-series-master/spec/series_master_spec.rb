@@ -52,4 +52,18 @@ describe SeriesMaster do
       expect(@master.most_seasons(nil)).to eq(nil)
     end
   end
+
+  describe "#most_episodes" do
+    it "should return the serie with most episodes within all provided" do
+      expect(@master.most_episodes(
+        ["V",
+        "breaking bad",
+        "IT Crowd"]
+        ).title).to eq("\"Breaking Bad\"")
+    end
+
+    it "should return nil when nil is provided" do
+      
+    end
+  end
 end

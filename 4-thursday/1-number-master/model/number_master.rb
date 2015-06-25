@@ -18,6 +18,10 @@ class NumberMaster
   def super_calculation(numbers)
     results = []
     results << mode(numbers)
+
+    results << median(numbers)
+
+    result << mean(numbers)
   end
 
   private
@@ -53,5 +57,16 @@ class NumberMaster
       i += 1
     end
     results.map { |key_value| key_value[0] }
+  end
+
+  def mean(numbers)
+    numbers.inject(:+) / numbers.size
+  end
+
+  def median(numbers)
+    numbers.sort!
+    median = if numbers.size.even?
+    else
+      sorted_numbers[numbers.size / 2]
   end
 end

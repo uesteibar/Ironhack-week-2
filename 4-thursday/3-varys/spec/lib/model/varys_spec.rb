@@ -36,6 +36,10 @@ describe Varys do
         "I", "kill", "but", "yet"
         ])).to eq []
     end
+
+    it 'should return an empty array if no words are provided' do
+      expect(@varys.backwards_wording([])).to eq []
+    end
   end
 
   describe '#friday_numbers' do

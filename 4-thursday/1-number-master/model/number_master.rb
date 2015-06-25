@@ -1,4 +1,6 @@
 
+require "pry"
+
 class NumberMaster
   def polarize(numbers)
     return if numbers.nil? || numbers.empty?
@@ -11,7 +13,11 @@ class NumberMaster
     else
       return nil
     end
+  end
 
+  def super_calculation(numbers)
+    results = []
+    results << mode(numbers)
   end
 
   private
@@ -33,5 +39,19 @@ class NumberMaster
 
   def clean_numbers(numbers)
     numbers.select { |number| number.is_a?(Numeric) }
+  end
+
+  def mode(numbers)
+    count = Hash.new(0)
+    results = []
+    numbers.each {|number| count[number] += 1}
+    count = count.sort_by { |k,v| v }.reverse
+    results << count.first
+    i = 1
+    while count[i][1] == results[0][1]
+      results << count[i]
+      i += 1
+    end
+    results.map { |key_value| key_value[0] }
   end
 end

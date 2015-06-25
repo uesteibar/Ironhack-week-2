@@ -40,4 +40,16 @@ describe NumberMaster do
       expect(@master.polarize(nil)).to eq nil
     end
   end
+
+  describe "#super_calculation" do
+    it 'should return the mode when there is a unique winner' do
+      expect( @master.super_calculation([
+        1, 2, 6, 2])[0]).to eq [2]
+    end
+
+    it 'should return multiple modes when there are multiple winners' do
+      expect( @master.super_calculation([
+        1, 2, 6, 6, 2])[0]).to eq [6, 2]
+    end
+  end
 end

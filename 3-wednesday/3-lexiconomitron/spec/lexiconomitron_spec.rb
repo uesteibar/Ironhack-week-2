@@ -41,12 +41,12 @@ describe Lexiconomitron do
   describe "#supercounter" do
     it "should return the number of letters within the array of words that appear before 't' in the alphabet" do
       expect(@lexiconomitron.supercounter([
-        "I", 
-        "am", 
-        "getting", 
-        "tired", 
-        "of", 
-        "your", 
+        "I",
+        "am",
+        "getting",
+        "tired",
+        "of",
+        "your",
         "words"])).to eq(20)
     end
   end

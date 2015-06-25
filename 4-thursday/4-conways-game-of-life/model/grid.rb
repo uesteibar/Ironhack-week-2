@@ -19,6 +19,20 @@ class Grid
     return @cells.map { |cell_row| cell_row.map { |cell| cell.alive } }
   end
 
+  def print
+    system "clear"
+    output = ""
+    @cells.each do |row|
+      row.each do |cell|
+        output << "|#{cell.alive ? 'x' : ' '}"
+      end
+      output << "|\n"
+    end
+    output
+  end
+
+  private
+
   def neighbors(y, x)
     (-1..1).inject [] do |values, py|
       (-1..1).each do |px|

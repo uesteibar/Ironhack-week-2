@@ -7,12 +7,12 @@ class Varys
 
   # Flatter Cersei
   def say_cersei_rocks!
-    "Cersei rocks!"
+    say_rocks!("Cersei")
   end
 
   # Flatter Joffrey
   def say_joffrey_rocks!
-    "Joffrey rocks!"
+    say_rocks!("Joffrey")
   end
 
   # Upon receiving a list of words, reverse them and return only the ones
@@ -32,5 +32,9 @@ class Varys
 
   def is_friday?
     Time.now.friday?
+  end
+
+  def say_rocks!(name)
+    "#{name} rocks!"
   end
 end

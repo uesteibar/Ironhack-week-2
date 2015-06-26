@@ -88,3 +88,7 @@ post '/shouts/like/:id' do |id|
   end
   redirect to('/')
 end
+
+get '/best' do
+  
+end

@@ -29,7 +29,7 @@
             <span><%= shout.message %></span>
             </p>
             <p>
-              <%= shout.likes %> like/s | <%= shout.created_at %> 
+              <%= shout.likes %> like/s | <%= shout.created_at %>
             </p>
             <form action="/shouts/like/<%= shout.id %>" method="post">
               <input type="submit" name="like" value="Like">

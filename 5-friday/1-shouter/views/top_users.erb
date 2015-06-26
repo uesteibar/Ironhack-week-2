@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Top users</title>
+    <link rel="stylesheet" href="/css/shout.css" media="screen" title="no title" charset="utf-8">
+
+  </head>
+  <body>
+    <form action="/users/logout" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <input class="shout-input" type="submit" name="logout" value="Log out">
+    </form>
+    
+    <h1>These are the best Shouters out there!</h1>
+    <a href="/">home</a>
+
+    <% if @users_total_likes.any? %>
+      <section class="timeline">
+          <% @users_total_likes.each_with_index do |user_likes, i| %>
+            <div class="shout-card">
+              <h4><%= i + 1 %>. <%= user_likes[0].name %></h4>
+              <a href="/<%= user_likes[0].handle %>"><%= user_likes[0].handle %></a>
+              <p>
+                <%= user_likes[1] %> like/s!
+              </p>
+            </div>
+          <% end %>
+      </section>
+    <% end %>
+  </body>
+</html>

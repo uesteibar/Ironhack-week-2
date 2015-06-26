@@ -69,7 +69,7 @@ end
 
 get '/home' do
   if session[:user_id]
-    @shouts = Shout.all
+    @shouts = ShoutRetriever.new.all.by(:date)
     erb :home
   else
     redirect to('/login')
@@ -93,6 +93,14 @@ end
 get '/best' do
   @shouts = ShoutRetriever.new.all.by(:likes)
   erb :best
+end
+
+get '/top-handles' do
+  res = User.connection.select_all("SELECT id, (SELECT SUM(likes) FROM shouts WHERE user_id = users.id) AS likes FROM users ORDER BY likes DESC")
+  @users_total_likes = res.rows.map { |id_likes|
+    [User.find_by_id(id_likes[0]), id_likes[1]]
+  }
+  erb :top_users
 end
 
 get '/:user_handle' do

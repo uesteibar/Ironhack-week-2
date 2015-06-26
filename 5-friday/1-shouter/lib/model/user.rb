@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :password
   validate :correct_password
+  has_many :followings, class_name:  "Following",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
 
   has_many :shouts
 
@@ -24,4 +27,9 @@ class User < ActiveRecord::Base
       return nil
     end
   end
+end
+
+class Following < ActiveRecord::Base
+  belongs_to :follower, class_name: "User"
+  belongs_to :followed, class_name: "User"
 end

@@ -68,9 +68,11 @@ delete '/users/logout' do
 end
 
 get '/home' do
-  if session[:user_id]
-    @shouts = ShoutRetriever.new.all.by(:date)
-    erb :home
+  if session[:user_id] && user = User.find_by_id(session[:user_id])
+    if user
+      @shouts = ShoutRetriever.new.from_many_users((user.followings.map { |f| f.followed_id })).by(:date)
+      erb :home
+    end
   else
     redirect to('/login')
   end

@@ -11,7 +11,7 @@ class ShoutRetriever
   def from_many_users(user_ids)
     shouts = []
     user_ids.each do |user_id|
-      from_user(user_id).each do |shout|
+      from_user(user_id).shouts.each do |shout|
         shouts << shout
       end
     end

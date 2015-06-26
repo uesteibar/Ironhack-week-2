@@ -15,4 +15,13 @@ class User < ActiveRecord::Base
       errors.add(:password, "It should be at least 8 characters long")
     end
   end
+
+  def shout!(shout)
+    if shout.message
+      self.shouts.create(message: shout.message, likes: 0)
+      return true
+    else
+      return nil
+    end
+  end
 end

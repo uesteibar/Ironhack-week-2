@@ -9,6 +9,9 @@ require "./lib/handler/login_handler"
 require "./lib/handler/signup_handler"
 require "./lib/generator/random_password_generator"
 
+require "./lib/model/user"
+require "./lib/model/shout"
+
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
   database: './lib/ddbb/shouter.sqlite'
@@ -65,8 +68,15 @@ end
 
 get '/home' do
   if session[:user_id]
+    @shouts = Shout.all
     erb :home
   else
     redirect to('/login')
   end
+end
+
+post '/shouts' do
+  user = User.find_by_id(session[:user_id])
+  user.shout!(Shout.new(message: params[:message]))
+  redirect to('/')
 end

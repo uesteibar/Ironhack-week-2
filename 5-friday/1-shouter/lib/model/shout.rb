@@ -3,7 +3,7 @@ require 'rubygems'
 require 'active_record'
 
 class Shout < ActiveRecord::Base
-  validates :likes, numericality: { greater_or_equals_than: 0, only_integer: true }
+  validates :likes, numericality: { greater_than_or_equals_than: 0, only_integer: true }
   validates_presence_of :user, :message
   validate :message_length, :existing_user
 

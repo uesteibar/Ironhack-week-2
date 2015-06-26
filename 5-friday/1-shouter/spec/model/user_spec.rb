@@ -68,4 +68,20 @@ describe User do
     end
   end
 
+  describe '#shout!' do
+    before(:each) do
+      @user = User.find_by_handle("sharebear")
+      @shout = Shout.new(message: "hey here!")
+    end
+
+    it 'should return true if the shout was created' do
+      expect(@user.shout!(@shout)).to be_truthy
+    end
+
+    it 'should return false if any problem happened' do
+      @shout.message = nil
+      expect(@user.shout!(@shout)).to be_falsy
+    end
+  end
+
 end

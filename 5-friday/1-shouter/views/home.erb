@@ -4,12 +4,38 @@
   <head>
     <meta charset="utf-8">
     <title>Shout! | Home</title>
-    <form action="/users/logout" method="post">
-      <input type="hidden" name="_method" value="DELETE">
-      <input type="submit" name="logout" value="Log out">
-    </form>
+    <link rel="stylesheet" href="/css/shout.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
+    <form action="/users/logout" method="post">
+      <input type="hidden" name="_method" value="DELETE">
+      <input class="shout-input" type="submit" name="logout" value="Log out">
+    </form>
     <h1>Shout!</h1>
+
+    <form class="" action="/shouts" method="post">
+      <textarea rows="4" cols="50" name="message" placeholder="just shout something..."></textarea>
+      <input type="submit" name="submit" value="shout!">
+    </form>
+
+    <section class="timeline">
+      <% if @shouts.any? %>
+        <% @shouts.each do |shout| %>
+          <div class="shout-card">
+            <p>
+            <%= "#{shout.user.handle} said:" %>
+            </p>
+            <p>
+            <span><%= shout.message %></span>
+            </p>
+            <p>
+            <%= shout.created_at %>
+            </p>
+          </div>
+
+        <% end %>
+      <% end %>
+    </section>
+
   </body>
 </html>

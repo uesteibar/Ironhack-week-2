@@ -67,6 +67,10 @@ delete '/users/logout' do
   redirect to('/')
 end
 
+put '/users/follow/:id' do |id|
+  Following.new(followed_id: id, follower_id: session[:user_id]).save
+end
+
 get '/home' do
   if session[:user_id] && user = User.find_by_id(session[:user_id])
     if user

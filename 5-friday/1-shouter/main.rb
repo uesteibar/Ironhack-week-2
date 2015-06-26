@@ -80,3 +80,11 @@ post '/shouts' do
   user.shout!(Shout.new(message: params[:message]))
   redirect to('/')
 end
+
+post '/shouts/like/:id' do |id|
+  if shout = Shout.find_by_id(id)
+    shout.likes += 1
+    shout.save
+  end
+  redirect to('/')
+end

@@ -1,5 +1,7 @@
 
 class ShoutCollection
+  attr_reader :shouts
+  
   def initialize(shouts)
     @shouts = shouts
     @sort_methods = {
@@ -10,5 +12,13 @@ class ShoutCollection
 
   def by(symbol)
     @sort_methods[symbol].call
+  end
+
+  def sort_by(symbol)
+    @shouts = @sort_methods[symbol].call
+  end
+
+  def shout(index)
+    @shouts[index]
   end
 end

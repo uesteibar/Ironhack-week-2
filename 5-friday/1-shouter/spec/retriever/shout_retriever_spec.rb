@@ -32,7 +32,7 @@ describe ShoutRetriever do
 
   describe '#from_user' do
     it 'should retrieve users shouts' do
-      expect(@retriever.from_user(@llorenc.id)[0]).to eq(@llorenc_shout)
+      expect(@retriever.from_user(@llorenc.id).shout(0)).to eq(@llorenc_shout)
     end
 
     it 'should return nil when user is not found' do

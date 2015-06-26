@@ -8,6 +8,7 @@ require 'active_record'
 require "./lib/handler/login_handler"
 require "./lib/handler/signup_handler"
 require "./lib/generator/random_password_generator"
+require "./lib/retriever/shout_retriever"
 
 require "./lib/model/user"
 require "./lib/model/shout"
@@ -90,5 +91,15 @@ post '/shouts/like/:id' do |id|
 end
 
 get '/best' do
-  
+  @shouts = ShoutRetriever.new.all.by(:likes)
+  erb :best
+end
+
+get '/:user_handle' do
+  user = User.find_by_handle(params[:user_handle])
+  if user
+    shouts = ShoutRetriever.new.from_user(user.id)
+    shouts.nil? ? @shouts = [] : @shouts = shouts.by(:date)
+    erb :profile
+  end
 end

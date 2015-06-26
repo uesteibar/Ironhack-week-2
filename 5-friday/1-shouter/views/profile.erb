@@ -3,27 +3,36 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Shout! | Home</title>
-    <link rel="stylesheet" href="/css/shout.css" media="screen" title="no title" charset="utf-8">
+    <title>
+      <% if @shouts.any? %>
+        <%= @shouts[0].user.handle %>
+      <% end %>
+
+      </title>
+      <link rel="stylesheet" href="/css/shout.css" media="screen" title="no title" charset="utf-8">
+
   </head>
   <body>
+
     <form action="/users/logout" method="post">
       <input type="hidden" name="_method" value="DELETE">
       <input class="shout-input" type="submit" name="logout" value="Log out">
     </form>
-    <h1>Shout!</h1>
+    <a href="/">home</a>
 
-    <form class="" action="/shouts" method="post">
-      <textarea rows="4" cols="50" name="message" placeholder="just shout something..."></textarea>
-      <input type="submit" name="submit" value="shout!">
-    </form>
+    <h1>
+      <% if @shouts.any? %>
+        <%= @shouts[0].user.handle %>
+      <% end %>
+    </h1>
 
     <section class="timeline">
       <% if @shouts.any? %>
         <% @shouts.each do |shout| %>
           <div class="shout-card">
             <p>
-              <a href="/<%= shout.user.handle %>"><%= shout.user.handle %></a> said:            </p>
+            <a href="/<%= shout.user.handle %>"><%= shout.user.handle %></a> said:
+            </p>
             <p>
             <span><%= shout.message %></span>
             </p>
@@ -37,6 +46,5 @@
         <% end %>
       <% end %>
     </section>
-
   </body>
 </html>

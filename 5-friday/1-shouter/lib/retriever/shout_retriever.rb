@@ -5,7 +5,7 @@ class ShoutRetriever
   def from_user(user_id)
     return if user_id.nil?
     user = User.find_by_id(user_id)
-    return user.nil? ? nil : user.shouts
+    return user.nil? ? nil : ShoutCollection.new(user.shouts)
   end
 
   def from_many_users(user_ids)
@@ -16,5 +16,9 @@ class ShoutRetriever
       end
     end
     ShoutCollection.new(shouts)
+  end
+
+  def all
+    ShoutCollection.new(Shout.all)
   end
 end

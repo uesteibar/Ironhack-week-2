@@ -26,6 +26,19 @@
       <% end %>
     </h1>
 
+    <% if @shouts[0].user.id != session[:user_id] %>
+      <% if @following %>
+        <form action="/users/unfollow/<%= @shouts[0].user.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" name="Unfollow" value="Unfollow">
+        </form>
+      <% else %>
+        <form action="/users/follow/<%= @shouts[0].user.id %>" method="post">
+          <input type="submit" name="follow" value="Follow">
+        </form>
+      <% end %>
+    <% end %>
+
     <section class="timeline">
       <% if @shouts.any? %>
         <% @shouts.each do |shout| %>

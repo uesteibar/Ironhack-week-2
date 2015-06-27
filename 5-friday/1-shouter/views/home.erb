@@ -22,11 +22,11 @@
     <a href="/top-handles">Best Shouters!</a>
 
     <section class="timeline">
-      <% if @shouts.any? %>
-        <% @shouts.each do |shout| %>
+      <% if @shouts.shouts.any? %>
+        <% @shouts.shouts.each do |shout| %>
           <div class="shout-card">
             <p>
-              <a href="/<%= shout.user.handle %>"><%= shout.user.handle %></a> said:            </p>
+              <a href="/<%= shout.user.handle %>"><%= shout.user.handle %></a> said:  </p>
             <p>
             <span><%= shout.message %></span>
             </p>

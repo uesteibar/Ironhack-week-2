@@ -67,14 +67,28 @@ delete '/users/logout' do
   redirect to('/')
 end
 
-put '/users/follow/:id' do |id|
-  Following.new(followed_id: id, follower_id: session[:user_id]).save
+post '/users/follow/:id' do |id|
+  if session[:user_id] && user = User.find_by_id(session[:user_id])
+      user.followings.create(followed_id: id, follower_id: session[:user_id])
+  end
+  redirect to('/home')
+end
+
+delete '/users/unfollow/:id' do
+  if session[:user_id] && user = User.find_by_id(session[:user_id])
+    user.followings.select { |f| f.follower_id == 7 }.each do |f|
+      f.destroy
+    end
+  end
+  redirect to('/home')
 end
 
 get '/home' do
   if session[:user_id] && user = User.find_by_id(session[:user_id])
     if user
-      @shouts = ShoutRetriever.new.from_many_users((user.followings.map { |f| f.followed_id })).by(:date)
+      @shouts = ShoutRetriever.new.from_many_users((user.followings.map { |f| f.followed_id }))
+      @shouts.add_many ShoutRetriever.new.from_user(user.id)
+      @shouts.sort_by(:date)
       erb :home
     end
   else
@@ -112,6 +126,12 @@ end
 get '/:user_handle' do
   user = User.find_by_handle(params[:user_handle])
   if user
+    relationships = Following.where("follower_id = #{session[:user_id]} AND followed_id = #{user.id}")
+    if relationships.any?
+      @following = true
+    else
+      @following = false
+    end
     shouts = ShoutRetriever.new.from_user(user.id)
     shouts.nil? ? @shouts = [] : @shouts = shouts.by(:date)
     erb :profile

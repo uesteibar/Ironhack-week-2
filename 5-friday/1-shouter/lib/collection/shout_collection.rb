@@ -1,7 +1,7 @@
 
 class ShoutCollection
   attr_reader :shouts
-  
+
   def initialize(shouts)
     @shouts = shouts
     @sort_methods = {
@@ -20,5 +20,11 @@ class ShoutCollection
 
   def shout(index)
     @shouts[index]
+  end
+
+  def add_many(shouts_collection)
+    shouts_collection.shouts.each do |shout|
+      @shouts << shout
+    end
   end
 end
